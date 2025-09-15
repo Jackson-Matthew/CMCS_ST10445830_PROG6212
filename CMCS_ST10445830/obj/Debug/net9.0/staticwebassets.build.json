@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jXFq02u3YoNnmwQQCWj1BGCTPZ4lAS+MVVXIQunnot0=",
+  "Hash": "ZYCa4KIjFX59pdUpRChOAsZrG9llpDyl6rdXTWAFNHA=",
   "Source": "CMCS_ST10445830",
   "BasePath": "_content/CMCS_ST10445830",
   "Mode": "Default",
@@ -1445,6 +1445,48 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\claims bg.jpg",
+      "SourceId": "CMCS_ST10445830",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\",
+      "BasePath": "_content/CMCS_ST10445830",
+      "RelativePath": "Images/claims bg#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "miedl0s09m",
+      "Integrity": "vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\claims bg.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\coord view claims.jpg",
+      "SourceId": "CMCS_ST10445830",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\",
+      "BasePath": "_content/CMCS_ST10445830",
+      "RelativePath": "Images/coord view claims#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "sl8vbd4g86",
+      "Integrity": "ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\coord view claims.jpg"
+    },
+    {
       "Identity": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\Coord-image.jpg",
       "SourceId": "CMCS_ST10445830",
       "SourceType": "Discovered",
@@ -1527,6 +1569,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\pexels-fauxels-3183150.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\woodbg claims.jpg",
+      "SourceId": "CMCS_ST10445830",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\",
+      "BasePath": "_content/CMCS_ST10445830",
+      "RelativePath": "Images/woodbg claims#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "wcde0qmhwx",
+      "Integrity": "4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\woodbg claims.jpg"
     },
     {
       "Identity": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\js\\site.js",
@@ -4004,6 +4067,170 @@
       ]
     },
     {
+      "Route": "Images/claims bg.jpg",
+      "AssetFile": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\claims bg.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "667360"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 12:00:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ="
+        }
+      ]
+    },
+    {
+      "Route": "Images/claims bg.miedl0s09m.jpg",
+      "AssetFile": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\claims bg.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "667360"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 12:00:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "miedl0s09m"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/claims bg.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ="
+        }
+      ]
+    },
+    {
+      "Route": "Images/coord view claims.jpg",
+      "AssetFile": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\coord view claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2704953"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:58:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys="
+        }
+      ]
+    },
+    {
+      "Route": "Images/coord view claims.sl8vbd4g86.jpg",
+      "AssetFile": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\coord view claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2704953"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:58:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sl8vbd4g86"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/coord view claims.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys="
+        }
+      ]
+    },
+    {
       "Route": "Images/Coord-image.5f7ytlyfy9.jpg",
       "AssetFile": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\Coord-image.jpg",
       "Selectors": [],
@@ -4328,6 +4555,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-sGUBU2HL7cYiabkdfjaAbShkZpHcRQv8eg25cPvYKeI="
+        }
+      ]
+    },
+    {
+      "Route": "Images/woodbg claims.jpg",
+      "AssetFile": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\woodbg claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1598067"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:56:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg="
+        }
+      ]
+    },
+    {
+      "Route": "Images/woodbg claims.wcde0qmhwx.jpg",
+      "AssetFile": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\woodbg claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1598067"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:56:57 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "wcde0qmhwx"
+        },
+        {
+          "Name": "label",
+          "Value": "Images/woodbg claims.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg="
         }
       ]
     },

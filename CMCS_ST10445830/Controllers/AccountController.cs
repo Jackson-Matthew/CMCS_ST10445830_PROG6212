@@ -16,17 +16,18 @@ namespace CMCS_ST10445830.Controllers
             {
                 return RedirectToAction("LecturerDashboard", "Dashboard");
             }
-            else if(username == "coordinator" && password == "password")
+            else if (username == "coordinator" && password == "password")
             {
                 return RedirectToAction("CoordinatorDashboard", "Dashboard");
             }
-            
-                ViewBag.ErrorMessage = "Invalid username or password.";
-                return View();
-            }
+
+            ViewBag.ErrorMessage = "Invalid username or password.";
+            return View();
+        }
         public IActionResult Logout()
         {
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+
     }
 }

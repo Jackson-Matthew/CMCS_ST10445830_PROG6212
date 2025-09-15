@@ -465,6 +465,170 @@
       ]
     },
     {
+      "Route": "Images/claims bg.jpg",
+      "AssetFile": "Images/claims bg.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "667360"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 12:00:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ="
+        }
+      ]
+    },
+    {
+      "Route": "Images/claims bg.miedl0s09m.jpg",
+      "AssetFile": "Images/claims bg.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "667360"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 12:00:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "miedl0s09m"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-vn+aC9emYKF+MWGCrNS92EBRdSObUQ1fNuINVDsXSlQ="
+        },
+        {
+          "Name": "label",
+          "Value": "Images/claims bg.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "Images/coord view claims.jpg",
+      "AssetFile": "Images/coord view claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2704953"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:58:28 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys="
+        }
+      ]
+    },
+    {
+      "Route": "Images/coord view claims.sl8vbd4g86.jpg",
+      "AssetFile": "Images/coord view claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2704953"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:58:28 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "sl8vbd4g86"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ULyKLO4zLYUOsyCRjQGpuTdtaXomblcC7c93nrnq3Ys="
+        },
+        {
+          "Name": "label",
+          "Value": "Images/coord view claims.jpg"
+        }
+      ]
+    },
+    {
       "Route": "Images/login gradient.jpg",
       "AssetFile": "Images/login gradient.jpg",
       "Selectors": [],
@@ -625,6 +789,88 @@
         {
           "Name": "label",
           "Value": "Images/pexels-fauxels-3183150.jpg"
+        }
+      ]
+    },
+    {
+      "Route": "Images/woodbg claims.jpg",
+      "AssetFile": "Images/woodbg claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1598067"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:56:57 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg="
+        }
+      ]
+    },
+    {
+      "Route": "Images/woodbg claims.wcde0qmhwx.jpg",
+      "AssetFile": "Images/woodbg claims.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1598067"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 11:56:57 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "wcde0qmhwx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4Hx/J1vX8NfIuNea0J+cDRo4YBHz1s0Td8wqbPnnTXg="
+        },
+        {
+          "Name": "label",
+          "Value": "Images/woodbg claims.jpg"
         }
       ]
     },

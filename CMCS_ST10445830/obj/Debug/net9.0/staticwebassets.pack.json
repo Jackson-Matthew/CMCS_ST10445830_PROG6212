@@ -13,12 +13,24 @@
       "PackagePath": "staticwebassets\\Images\\Gradient image.jpg"
     },
     {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\claims bg.jpg",
+      "PackagePath": "staticwebassets\\Images\\claims bg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\coord view claims.jpg",
+      "PackagePath": "staticwebassets\\Images\\coord view claims.jpg"
+    },
+    {
       "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\login gradient.jpg",
       "PackagePath": "staticwebassets\\Images\\login gradient.jpg"
     },
     {
       "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\pexels-fauxels-3183150.jpg",
       "PackagePath": "staticwebassets\\Images\\pexels-fauxels-3183150.jpg"
+    },
+    {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\Images\\woodbg claims.jpg",
+      "PackagePath": "staticwebassets\\Images\\woodbg claims.jpg"
     },
     {
       "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\wwwroot\\css\\site.css",

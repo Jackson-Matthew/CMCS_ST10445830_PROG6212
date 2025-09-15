@@ -62,10 +62,13 @@ C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\
 C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\wwwroot\lib\jquery\dist\jquery.js
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\Images\claims bg.jpg
+wwwroot\Images\coord view claims.jpg
 wwwroot\Images\Coord-image.jpg
 wwwroot\Images\Gradient image.jpg
 wwwroot\Images\login gradient.jpg
 wwwroot\Images\pexels-fauxels-3183150.jpg
+wwwroot\Images\woodbg claims.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
