@@ -11,37 +11,45 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CMCS_ST10445830</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item mx-5">
+                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item mx-5">
+                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item mx-5">
+                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Submit A Claim">Submit A Claim</a>
+                    </li>
+                    <li class="nav-item mx-5">
+                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Upload Documents">Upload Documents</a>
+                    </li>
+                    <li class="nav-item mx-5">
+                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Manage Approvals">Manage Approvals</a>
+                    </li>
+                    <li class="nav-item mx-5">
+                        <a class="btn btn-dark no-hover" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - CMCS_ST10445830 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer>
+        <div class="border-top footer text-start fw-bold">
+            &copy; 2025 - Copyright - See how CMCS protects your privacy --> <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+
     </footer>
+    <main role="main">
+        @RenderBody()
+    </main>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

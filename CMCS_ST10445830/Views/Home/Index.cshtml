@@ -2,7 +2,23 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero d-flex align-items-center justify-content-center text-center">
+    <div class ="d-inline-block px-4 py-2 rounded"
+         style="background-color: rgba(255, 255, 255, 0.7);">
+        <h1 class="text-dark display-3 fw-bold">Welcome to CMCS</h1>
+        <p class="text-dark-50 lead fw-bold">Login below for Lecturers and Academic Coordinators</p>
+        <a href="/Account/Login" class="btn btn-dark btn-lg mt-3">Login</a>
+    </div>
 </div>
+
+<style>
+    .hero {
+        background: url('/Images/pexels-fauxels-3183150.jpg') no-repeat center center;
+        background-size: cover;
+        height: 100vh; /* Full viewport height */
+        width: 100%; /* Full width */
+    }
+</style>
+
+
+

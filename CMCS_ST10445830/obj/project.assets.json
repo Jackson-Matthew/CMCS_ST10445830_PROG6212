@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830\\CMCS_ST10445830.csproj",
+      "projectUniqueName": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\CMCS_ST10445830.csproj",
       "projectName": "CMCS_ST10445830",
-      "projectPath": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830\\CMCS_ST10445830.csproj",
+      "projectPath": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\CMCS_ST10445830.csproj",
       "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830\\obj\\",
+      "outputPath": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
