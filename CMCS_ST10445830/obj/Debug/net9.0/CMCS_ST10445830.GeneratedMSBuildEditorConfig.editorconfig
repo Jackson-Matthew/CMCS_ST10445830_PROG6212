@@ -28,6 +28,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhaW1zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/matth/OneDrive/Desktop/GitHub/CMCS_ST10445830_PROG6212/CMCS_ST10445830/Views/Claims/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhaW1zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matth/OneDrive/Desktop/GitHub/CMCS_ST10445830_PROG6212/CMCS_ST10445830/Views/Claims/ViewAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhaW1zXFZpZXdBbGwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/matth/OneDrive/Desktop/GitHub/CMCS_ST10445830_PROG6212/CMCS_ST10445830/Views/Dashboard/CoordinatorDashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXENvb3JkaW5hdG9yRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/matth/OneDrive/Desktop/GitHub/CMCS_ST10445830_PROG6212/CMCS_ST10445830/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matth/OneDrive/Desktop/GitHub/CMCS_ST10445830_PROG6212/CMCS_ST10445830/Views/ManageApprovals/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlQXBwcm92YWxzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/matth/OneDrive/Desktop/GitHub/CMCS_ST10445830_PROG6212/CMCS_ST10445830/Views/Shared/Error.cshtml]

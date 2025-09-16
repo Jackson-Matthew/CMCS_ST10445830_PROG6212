@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CMCS_ST10445830.Models.Claim>
+
+@{
+    ViewData["Title"] = "All Lecturer Claims";
+}
+
+<div class="hero d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container">
+        <h2 class="mb-4 text-center text-white">
+            <i class="fas fa-clipboard-list"></i> All Lecturer Claims
+        </h2>
+
+        <div class="card shadow-lg border-0">
+            <div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-success">
+                        <tr>
+                            <th>ID</th>
+                            <th>Lecturer</th>
+                            <th>Hours Worked</th>
+                            <th>Hourly Rate</th>
+                            <th>Notes</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var claim in Model)
+                        {
+                            <tr>
+                                <td>@claim.Id</td>
+                                <td>@claim.LecturerName</td>
+                                <td>@claim.HoursWorked</td>
+                                <td>@claim.HourlyRate.ToString("C")</td>
+                                <td>@claim.Notes</td>
+                                <td>
+                                    <span class="badge
+                                        @(claim.Status == "Approved" ? "bg-success"
+                                        : claim.Status == "Pending" ? "bg-warning text-dark"
+                                        : "bg-primary")">
+                                        @claim.Status
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero {
+        background: url('/Images/coord view claims.jpg') no-repeat center center;
+        background-size: cover;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+</style>
