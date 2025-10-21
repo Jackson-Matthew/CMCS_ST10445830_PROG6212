@@ -34,14 +34,14 @@
                                 <td>@claim.Notes</td>
                                 <td>
                                     <span class="badge
-                                        @(claim.Status == "Approved" ? "bg-success"
-                                        : claim.Status == "Pending" ? "bg-warning text-dark"
-                                        : "bg-primary")">
-                                        @claim.Status
-                                    </span>
-                                </td>
-                            </tr>
-                        }
+                                            @(claim.Status == "Approved" ? "bg-success"
+                                                                                  : claim.Status == "Pending" ? "bg-warning text-dark"
+                                                                                  : "bg-primary")">
+                                    @claim.Status
+                                </span>
+                            </td>
+                        </tr>
+                                                }
                     </tbody>
                 </table>
             </div>

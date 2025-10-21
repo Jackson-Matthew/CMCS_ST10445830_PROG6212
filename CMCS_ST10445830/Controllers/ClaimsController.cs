@@ -1,59 +1,110 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CMCS_ST10445830.Models;
-using System.Collections.Generic;
+using CMCS_ST10445830.Services;
 
 namespace CMCS_ST10445830.Controllers
 {
     public class ClaimsController : Controller
     {
+        private readonly IInMemoryStorageService _storageService;
 
-        public IActionResult ViewAll()
+        public ClaimsController(IInMemoryStorageService storageService)
         {
-            var claims = new List<Claim>
-            {
-                new Claim { Id = 1, LecturerName = "Dr. Jackson", HoursWorked = 10, HourlyRate = 200, Notes = "Tutorials", Status = "Pending" },
-                new Claim { Id = 2, LecturerName = "Prof. Davids", HoursWorked = 8, HourlyRate = 220, Notes = "Marking", Status = "Approved" },
-                new Claim { Id = 3, LecturerName = "Dr. khumalo", HoursWorked = 12, HourlyRate = 180, Notes = "Lectures", Status = "Paid" }
-            };
-
-            return View(claims);
+            _storageService = storageService ?? throw new ArgumentNullException(nameof(storageService));
         }
+
+        // GET: Create Claim Form
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Index()
+        // GET: My Claims
+        public async Task<IActionResult> Index()
         {
-            var claims = new List<Claim>
-            {
-                new Claim { Id = 1, HoursWorked = 10, HourlyRate = 200, Notes = "Tutorials", Status = "Pending" },
-                new Claim { Id = 2, HoursWorked = 8, HourlyRate = 220, Notes = "Marking", Status = "Approved" },
-                new Claim { Id = 3, HoursWorked = 12, HourlyRate = 180, Notes = "Lectures", Status = "Paid" }
-            };
-
+            var lecturerName = User.Identity?.Name ?? "DemoLecturer";
+            var claims = await _storageService.GetClaimsByLecturerAsync(lecturerName);
             return View(claims);
         }
+
+        // GET: All Claims (for coordinators)
+        public async Task<IActionResult> ViewAll()
+        {
+            var claims = await _storageService.GetAllClaimsAsync();
+            return View(claims);
+        }
+
+        // GET: Manage Approvals
+        public async Task<IActionResult> ManageApprovals()
+        {
+            var claims = await _storageService.GetAllClaimsAsync();
+            return View(claims);
+        }
+
+        // POST: Create Claim
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Claim claim)
+        public async Task<IActionResult> Create(Claim claim)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // TODO: Save claim to database
-                // e.g., _context.Claims.Add(claim); _context.SaveChanges();
-
-                return RedirectToAction("Success");
+                TempData["ErrorMessage"] = "⚠️ Failed to submit claim. Please check your input.";
+                return View(claim);
             }
 
-            return View(claim);
+            try
+            {
+                string fileUrl = string.Empty;
+                if (claim.DocumentFile != null && claim.DocumentFile.Length > 0)
+                {
+                    fileUrl = await _storageService.UploadFileAsync(claim.DocumentFile);
+                }
+
+                claim.LecturerName = User.Identity?.Name ?? "DemoLecturer";
+                claim.Status = "Pending";
+                claim.DocumentUrl = fileUrl;
+
+                await _storageService.AddClaimAsync(claim);
+
+                TempData["SuccessMessage"] = "✅ Claim submitted successfully!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"❌ Error submitting claim: {ex.Message}";
+                return View(claim);
+            }
         }
 
-        public IActionResult Success()
+        // POST: Approve Claim
+        [HttpPost]
+        public async Task<IActionResult> Approve(string id)
         {
-            return View();
+            if (string.IsNullOrEmpty(id))
+            {
+                TempData["ErrorMessage"] = "⚠️ Invalid claim ID.";
+                return RedirectToAction("ManageApprovals");
+            }
+
+            await _storageService.UpdateClaimStatusAsync(id, "Approved");
+            TempData["SuccessMessage"] = "✅ Claim approved successfully!";
+            return RedirectToAction("ManageApprovals");
         }
 
+        // POST: Reject Claim
+        [HttpPost]
+        public async Task<IActionResult> Reject(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                TempData["ErrorMessage"] = "⚠️ Invalid claim ID.";
+                return RedirectToAction("ManageApprovals");
+            }
+
+            await _storageService.UpdateClaimStatusAsync(id, "Rejected");
+            TempData["SuccessMessage"] = "🚫 Claim rejected successfully!";
+            return RedirectToAction("ManageApprovals");
+        }
     }
 }
-
