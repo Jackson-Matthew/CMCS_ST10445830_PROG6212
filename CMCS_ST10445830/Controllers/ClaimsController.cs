@@ -23,7 +23,7 @@ namespace CMCS_ST10445830.Controllers
         // GET: My Claims
         public async Task<IActionResult> Index()
         {
-            var lecturerName = User.Identity?.Name ?? "DemoLecturer";
+            var lecturerName = User.Identity?.Name ?? "Unknown Lecturer";
             var claims = await _storageService.GetClaimsByLecturerAsync(lecturerName);
             return View(claims);
         }
@@ -49,7 +49,7 @@ namespace CMCS_ST10445830.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["ErrorMessage"] = "⚠️ Failed to submit claim. Please check your input.";
+                TempData["ErrorMessage"] = "Failed to submit claim. Please check your input.";
                 return View(claim);
             }
 
@@ -61,20 +61,31 @@ namespace CMCS_ST10445830.Controllers
                     fileUrl = await _storageService.UploadFileAsync(claim.DocumentFile);
                 }
 
-                claim.LecturerName = User.Identity?.Name ?? "DemoLecturer";
+                // Set lecturer name and other properties
+                claim.LecturerName = User.Identity?.Name ?? "Unknown Lecturer";
                 claim.Status = "Pending";
                 claim.DocumentUrl = fileUrl;
 
                 await _storageService.AddClaimAsync(claim);
 
-                TempData["SuccessMessage"] = "✅ Claim submitted successfully!";
+                TempData["SuccessMessage"] = "Claim submitted successfully!";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = $"❌ Error submitting claim: {ex.Message}";
+                TempData["ErrorMessage"] = $"Error submitting claim: {ex.Message}";
                 return View(claim);
             }
+        }
+
+        // GET: View Document
+        public IActionResult ViewDocument(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return BadRequest("Invalid document URL.");
+
+            // Files are served from wwwroot/uploads via static files
+            return Redirect(url);
         }
 
         // POST: Approve Claim
@@ -83,12 +94,20 @@ namespace CMCS_ST10445830.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                TempData["ErrorMessage"] = "⚠️ Invalid claim ID.";
+                TempData["ErrorMessage"] = "Invalid claim ID.";
                 return RedirectToAction("ManageApprovals");
             }
 
-            await _storageService.UpdateClaimStatusAsync(id, "Approved");
-            TempData["SuccessMessage"] = "✅ Claim approved successfully!";
+            try
+            {
+                await _storageService.UpdateClaimStatusAsync(id, "Approved");
+                TempData["SuccessMessage"] = "Claim approved successfully!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error approving claim: {ex.Message}";
+            }
+
             return RedirectToAction("ManageApprovals");
         }
 
@@ -98,13 +117,26 @@ namespace CMCS_ST10445830.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                TempData["ErrorMessage"] = "⚠️ Invalid claim ID.";
+                TempData["ErrorMessage"] = "Invalid claim ID.";
                 return RedirectToAction("ManageApprovals");
             }
 
-            await _storageService.UpdateClaimStatusAsync(id, "Rejected");
-            TempData["SuccessMessage"] = "🚫 Claim rejected successfully!";
+            try
+            {
+                await _storageService.UpdateClaimStatusAsync(id, "Rejected");
+                TempData["SuccessMessage"] = "Claim rejected successfully!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Error rejecting claim: {ex.Message}";
+            }
+
             return RedirectToAction("ManageApprovals");
+        }
+
+        public IActionResult Success()
+        {
+            return View();
         }
     }
 }

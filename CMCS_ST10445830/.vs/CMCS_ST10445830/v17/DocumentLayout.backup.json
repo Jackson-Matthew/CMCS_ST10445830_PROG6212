@@ -3,20 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\views\\dashboard\\lecturerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:views\\dashboard\\lecturerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\controllers\\manageapprovalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:controllers\\manageapprovalscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\views\\manageapprovals\\allclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:views\\manageapprovals\\allclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\views\\manageapprovals\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:views\\manageapprovals\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\views\\claims\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:views\\claims\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\controllers\\claimscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:controllers\\claimscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\controllers\\uploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:controllers\\uploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\models\\upload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:models\\upload.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\services\\inmemorystorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\services\\iinmemorystorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:services\\iinmemorystorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|c:\\users\\matth\\onedrive\\desktop\\github\\cmcs_st10445830_prog6212\\cmcs_st10445830\\views\\claims\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BCCD498B-C0B3-455E-93D4-53D01C53DA57}|CMCS_ST10445830.csproj|solutionrelative:views\\claims\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,8 +62,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "InMemoryStorageService.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Services\\InMemoryStorageService.cs",
+              "RelativeDocumentMoniker": "Services\\InMemoryStorageService.cs",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Services\\InMemoryStorageService.cs",
+              "RelativeToolTip": "Services\\InMemoryStorageService.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAowFoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T19:52:19.71Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -47,84 +85,149 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LecturerDashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Dashboard\\LecturerDashboard.cshtml",
-              "RelativeDocumentMoniker": "Views\\Dashboard\\LecturerDashboard.cshtml",
-              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Dashboard\\LecturerDashboard.cshtml",
-              "RelativeToolTip": "Views\\Dashboard\\LecturerDashboard.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T19:37:44.395Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
+              "Title": "ManageApprovalsController.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\ManageApprovalsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ManageApprovalsController.cs",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\ManageApprovalsController.cs",
+              "RelativeToolTip": "Controllers\\ManageApprovalsController.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAkwGUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T19:04:07.297Z",
+              "WhenOpened": "2025-10-21T20:50:10.997Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ClaimsController.cs",
-              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\ClaimsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ClaimsController.cs",
-              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\ClaimsController.cs",
-              "RelativeToolTip": "Controllers\\ClaimsController.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAuwG4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T19:02:27.315Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Claims\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Claims\\Create.cshtml",
-              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Claims\\Create.cshtml",
-              "RelativeToolTip": "Views\\Claims\\Create.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAC4AAAAcAAAAAAAAAA==",
+              "Title": "AllClaims.cshtml",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\ManageApprovals\\AllClaims.cshtml",
+              "RelativeDocumentMoniker": "Views\\ManageApprovals\\AllClaims.cshtml",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\ManageApprovals\\AllClaims.cshtml",
+              "RelativeToolTip": "Views\\ManageApprovals\\AllClaims.cshtml",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAkwKUAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T19:03:29.315Z",
+              "WhenOpened": "2025-10-21T20:53:15.53Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InMemoryStorageService.cs",
-              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Services\\InMemoryStorageService.cs",
-              "RelativeDocumentMoniker": "Services\\InMemoryStorageService.cs",
-              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Services\\InMemoryStorageService.cs",
-              "RelativeToolTip": "Services\\InMemoryStorageService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T19:00:30.614Z",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\ManageApprovals\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\ManageApprovals\\Index.cshtml",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\ManageApprovals\\Index.cshtml",
+              "RelativeToolTip": "Views\\ManageApprovals\\Index.cshtml",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAkwKoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T20:50:49.016Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-21T18:59:27.39Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T21:02:25.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T21:00:19.436Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Claims\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Claims\\Index.cshtml",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Claims\\Index.cshtml",
+              "RelativeToolTip": "Views\\Claims\\Index.cshtml",
+              "ViewState": "AgIAADsAAAAAAAAAAAAkwGIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T20:42:11.03Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClaimsController.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\ClaimsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClaimsController.cs",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\ClaimsController.cs",
+              "RelativeToolTip": "Controllers\\ClaimsController.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAswDsAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T20:16:25.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UploadController.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\UploadController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UploadController.cs",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Controllers\\UploadController.cs",
+              "RelativeToolTip": "Controllers\\UploadController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowD0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T20:08:26.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Upload.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Models\\Upload.cs",
+              "RelativeDocumentMoniker": "Models\\Upload.cs",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Models\\Upload.cs",
+              "RelativeToolTip": "Models\\Upload.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T20:41:17.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Claim.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Models\\Claim.cs",
+              "RelativeDocumentMoniker": "Models\\Claim.cs",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Models\\Claim.cs",
+              "RelativeToolTip": "Models\\Claim.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAmwCQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T20:41:03.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAkwCYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T20:08:13.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "IInMemoryStorageService.cs",
               "DocumentMoniker": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Services\\IInMemoryStorageService.cs",
               "RelativeDocumentMoniker": "Services\\IInMemoryStorageService.cs",
@@ -132,7 +235,7 @@
               "RelativeToolTip": "Services\\IInMemoryStorageService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T18:46:30.917Z",
+              "WhenOpened": "2025-10-21T20:25:55.388Z",
               "EditorCaption": ""
             }
           ]

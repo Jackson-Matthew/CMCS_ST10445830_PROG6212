@@ -4,7 +4,7 @@ namespace CMCS_ST10445830.Services
 {
     public class InMemoryStorageService : IInMemoryStorageService
     {
-        private static readonly List<Claim> _claims = new List<Claim>();
+        private readonly List<Claim> _claims = new List<Claim>();
         private readonly IWebHostEnvironment _environment;
         private readonly ILogger<InMemoryStorageService> _logger;
 

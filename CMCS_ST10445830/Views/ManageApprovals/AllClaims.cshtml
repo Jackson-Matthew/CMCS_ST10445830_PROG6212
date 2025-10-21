@@ -1,0 +1,166 @@
+﻿@model IEnumerable<CMCS_ST10445830.Models.Claim>
+
+@{
+    ViewData["Title"] = "All Claims";
+}
+
+<div class="hero d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-white mb-0">
+                <i class="fas fa-list-alt"></i> All Claims
+            </h2>
+            <div>
+                <a asp-action="Index" class="btn btn-outline-light me-2">
+                    <i class="fas fa-clock"></i> Pending Claims
+                </a>
+                <a asp-controller="Dashboard" asp-action="CoordinatorDashboard" class="btn btn-outline-light">
+                    <i class="fas fa-arrow-left"></i> Dashboard
+                </a>
+            </div>
+        </div>
+
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar"></i> Claims Overview
+                    <span class="badge bg-light text-dark ms-2">@Model.Count() Total</span>
+                </h5>
+            </div>
+            <div class="card-body">
+                <!-- Statistics -->
+                @{
+                    var pending = Model.Count(c => c.Status == "Pending");
+                    var approved = Model.Count(c => c.Status == "Approved");
+                    var rejected = Model.Count(c => c.Status == "Rejected");
+                }
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card bg-warning text-dark">
+                            <div class="card-body text-center">
+                                <h4 class="mb-0">@pending</h4>
+                                <small>Pending</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white">
+                            <div class="card-body text-center">
+                                <h4 class="mb-0">@approved</h4>
+                                <small>Approved</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body text-center">
+                                <h4 class="mb-0">@rejected</h4>
+                                <small>Rejected</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Lecturer</th>
+                                <th>Month</th>
+                                <th>Hours</th>
+                                <th>Rate</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Document</th>
+                                <th>Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var claim in Model)
+                            {
+                                <tr>
+                                    <td><strong>@claim.LecturerName</strong></td>
+                                    <td>@claim.Month</td>
+                                    <td>@claim.HoursWorked</td>
+                                    <td>@claim.HourlyRate.ToString("C")</td>
+                                    <td><strong>@claim.TotalAmount.ToString("C")</strong></td>
+                                    <td>
+                                        @if (claim.Status == "Pending")
+                                        {
+                                            <span class="badge bg-warning text-dark">@claim.Status</span>
+                                        }
+                                        else if (claim.Status == "Approved")
+                                        {
+                                            <span class="badge bg-success">@claim.Status</span>
+                                        }
+                                        else if (claim.Status == "Rejected")
+                                        {
+                                            <span class="badge bg-danger">@claim.Status</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(claim.DocumentUrl))
+                                        {
+                                            <a href="@claim.DocumentUrl" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-file"></i> View
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">No document</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">@claim.CreatedDate.ToString("MMM dd, yyyy")</small>
+                                    </td>
+                                    <td>
+                                        @if (claim.Status == "Pending")
+                                        {
+                                            <div class="btn-group btn-group-sm">
+                                                <form method="post" asp-action="Approve" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@claim.Id" />
+                                                    <button type="submit" class="btn btn-success btn-sm"
+                                                            onclick="return confirm('Approve this claim?')">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                </form>
+                                                <form method="post" asp-action="Reject" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+                                                    <input type="hidden" name="id" value="@claim.Id" />
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                            onclick="return confirm('Reject this claim?')">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">No actions</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero {
+        background: url('/Images/coord view claims.jpg') no-repeat center center;
+        background-size: cover;
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .card {
+        border-radius: 15px;
+    }
+</style>
