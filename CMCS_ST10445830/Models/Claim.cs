@@ -27,11 +27,17 @@ namespace CMCS_ST10445830.Models
         public string DocumentUrl { get; set; } = string.Empty;
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
-        // For file uploads only
+        public decimal CalculateTotalAmount()
+        {
+            return (decimal)(HoursWorked * HourlyRate);
+        }
+        // For file uploads
         [NotMapped]
         public IFormFile? DocumentFile { get; set; }
 
         [NotMapped]
         public double TotalAmount => HoursWorked * HourlyRate;
+    
+        
     }
 }
