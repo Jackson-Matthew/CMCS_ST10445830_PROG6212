@@ -13,14 +13,12 @@ namespace CMCS_ST10445830.Controllers
             _storageService = storageService ?? throw new ArgumentNullException(nameof(storageService));
         }
 
-        // GET: Create Claim Form
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        // GET: My Claims
         public async Task<IActionResult> Index()
         {
             var lecturerName = User.Identity?.Name ?? "Unknown Lecturer";
@@ -28,21 +26,18 @@ namespace CMCS_ST10445830.Controllers
             return View(claims);
         }
 
-        // GET: All Claims (for coordinators)
         public async Task<IActionResult> ViewAll()
         {
             var claims = await _storageService.GetAllClaimsAsync();
             return View(claims);
         }
 
-        // GET: Manage Approvals
         public async Task<IActionResult> ManageApprovals()
         {
             var claims = await _storageService.GetAllClaimsAsync();
             return View(claims);
         }
 
-        // POST: Create Claim
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Claim claim)
@@ -60,8 +55,6 @@ namespace CMCS_ST10445830.Controllers
                 {
                     fileUrl = await _storageService.UploadFileAsync(claim.DocumentFile);
                 }
-
-                // Set lecturer name and other properties
                 claim.LecturerName = User.Identity?.Name ?? "Unknown Lecturer";
                 claim.Status = "Pending";
                 claim.DocumentUrl = fileUrl;
@@ -77,18 +70,14 @@ namespace CMCS_ST10445830.Controllers
                 return View(claim);
             }
         }
-
-        // GET: View Document
         public IActionResult ViewDocument(string url)
         {
             if (string.IsNullOrEmpty(url))
                 return BadRequest("Invalid document URL.");
 
-            // Files are served from wwwroot/uploads via static files
             return Redirect(url);
         }
 
-        // POST: Approve Claim
         [HttpPost]
         public async Task<IActionResult> Approve(string id)
         {
@@ -111,7 +100,6 @@ namespace CMCS_ST10445830.Controllers
             return RedirectToAction("ManageApprovals");
         }
 
-        // POST: Reject Claim
         [HttpPost]
         public async Task<IActionResult> Reject(string id)
         {

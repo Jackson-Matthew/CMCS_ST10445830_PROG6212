@@ -15,13 +15,11 @@ namespace CMCS_ST10445830.Controllers
             _logger = logger;
         }
 
-        // GET: Manage Approvals Page
         public async Task<IActionResult> Index()
         {
             try
             {
                 var claims = await _storageService.GetAllClaimsAsync();
-                // Filter to show only pending claims for approval
                 var pendingClaims = claims.Where(c => c.Status == "Pending").ToList();
                 return View(pendingClaims);
             }
@@ -33,7 +31,6 @@ namespace CMCS_ST10445830.Controllers
             }
         }
 
-        // GET: All Claims (including approved/rejected for review)
         public async Task<IActionResult> AllClaims()
         {
             try
@@ -49,7 +46,6 @@ namespace CMCS_ST10445830.Controllers
             }
         }
 
-        // POST: Approve Claim
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Approve(string id)
@@ -75,7 +71,6 @@ namespace CMCS_ST10445830.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: Reject Claim
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reject(string id)

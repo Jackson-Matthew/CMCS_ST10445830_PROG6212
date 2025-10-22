@@ -57,20 +57,19 @@ namespace CMCS_ST10445830.Services
         {
             try
             {
-                // Save file to wwwroot/uploads folder
-                var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads");
+                var rootPath = _environment.WebRootPath ??
+                       Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+      
+                var uploadsFolder = Path.Combine(rootPath, "uploads");
 
-                // Create directory if it doesn't exist
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                // Generate unique file name
                 var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
                 var filePath = Path.Combine(uploadsFolder, fileName);
 
-                // Save the file
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
@@ -78,7 +77,6 @@ namespace CMCS_ST10445830.Services
 
                 _logger.LogInformation($"File uploaded: {fileName}");
 
-                // Return relative URL
                 return $"/uploads/{fileName}";
             }
             catch (Exception ex)
