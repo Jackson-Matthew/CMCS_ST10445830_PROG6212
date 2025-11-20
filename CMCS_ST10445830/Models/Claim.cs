@@ -5,39 +5,38 @@ namespace CMCS_ST10445830.Models
 {
     public class Claim
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string PartitionKey { get; set; } = "claims";
-        public string RowKey { get; set; } = Guid.NewGuid().ToString();
-
-        public string LecturerName { get; set; } = string.Empty;
+        [Key]
+        public int Id { get; set; }
 
         [Required]
-        public string Month { get; set; } = string.Empty;
+        public int LecturerId { get; set; }
+        public User? Lecturer { get; set; }
+
+        public int? CoordinatorId { get; set; }
+        public User? Coordinator { get; set; }
+
+        public int? ManagerId { get; set; }
+        public User? Manager { get; set; }
 
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Hours worked must be at least 1")]
-        public int HoursWorked { get; set; }
+        [Range(1, 9999, ErrorMessage = "Hours worked must be at least 1")]
+        public decimal HoursWorked { get; set; }
 
         [Required]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Hourly rate must be greater than 0")]
-        public double HourlyRate { get; set; }
+        [Range(0.01, 10000, ErrorMessage = "Hourly rate must be greater than 0")]
+        public decimal HourlyRateAtSubmission { get; set; }
 
-        public string Notes { get; set; } = string.Empty;
-        public string Status { get; set; } = "Pending";
-        public string DocumentUrl { get; set; } = string.Empty;
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        [NotMapped]
+        public decimal TotalAmount => HoursWorked * HourlyRateAtSubmission;
 
-        public decimal CalculateTotalAmount()
-        {
-            return (decimal)(HoursWorked * HourlyRate);
-        }
-        // For file uploads
+        public string? DocumentationPath { get; set; }
+
         [NotMapped]
         public IFormFile? DocumentFile { get; set; }
 
-        [NotMapped]
-        public double TotalAmount => HoursWorked * HourlyRate;
-    
-        
+        public string Status { get; set; } = "Pending";
+
+        public DateTime SubmittedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? ReviewedAt { get; set; }
     }
 }

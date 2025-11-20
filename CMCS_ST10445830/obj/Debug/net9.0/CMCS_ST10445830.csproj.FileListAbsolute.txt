@@ -442,3 +442,5 @@ C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\
 C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
+C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\bin\Debug\net9.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+C:\Users\matth\OneDrive\Desktop\GitHub\CMCS_ST10445830_PROG6212\CMCS_ST10445830\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

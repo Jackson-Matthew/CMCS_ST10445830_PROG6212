@@ -12,7 +12,7 @@
             </h2>
             <div>
                 <a asp-action="Index" class="btn btn-outline-light me-2">
-                    <i class="fas fa-clock"></i> Pending Claims
+                    <i class="fas fa-clock"></i> My Claims
                 </a>
                 <a asp-controller="Dashboard" asp-action="CoordinatorDashboard" class="btn btn-outline-light">
                     <i class="fas fa-arrow-left"></i> Dashboard
@@ -67,13 +67,13 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Lecturer</th>
-                                <th>Month</th>
                                 <th>Hours</th>
                                 <th>Rate</th>
                                 <th>Total</th>
                                 <th>Status</th>
                                 <th>Document</th>
                                 <th>Submitted</th>
+                                <th>Reviewed</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -81,10 +81,13 @@
                             @foreach (var claim in Model)
                             {
                                 <tr>
-                                    <td><strong>@claim.LecturerName</strong></td>
-                                    <td>@claim.Month</td>
+                                    <td>
+                                        <strong>@(claim.Lecturer?.Username ?? "Unknown")</strong>
+                                        <br />
+                                        <small class="text-muted">Coord: @(claim.Coordinator?.Username ?? "Pending")</small>
+                                    </td>
                                     <td>@claim.HoursWorked</td>
-                                    <td>@claim.HourlyRate.ToString("C")</td>
+                                    <td>@claim.HourlyRateAtSubmission.ToString("C")</td>
                                     <td><strong>@claim.TotalAmount.ToString("C")</strong></td>
                                     <td>
                                         @if (claim.Status == "Pending")
@@ -101,9 +104,9 @@
                                         }
                                     </td>
                                     <td>
-                                        @if (!string.IsNullOrEmpty(claim.DocumentUrl))
+                                        @if (!string.IsNullOrEmpty(claim.DocumentationPath))
                                         {
-                                            <a href="@claim.DocumentUrl" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <a href="/documents/@claim.DocumentationPath" target="_blank" class="btn btn-sm btn-outline-primary">
                                                 <i class="fas fa-file"></i> View
                                             </a>
                                         }
@@ -113,28 +116,30 @@
                                         }
                                     </td>
                                     <td>
-                                        <small class="text-muted">@claim.CreatedDate.ToString("MMM dd, yyyy")</small>
+                                        <small class="text-muted">@claim.SubmittedAt.ToString("MMM dd, yyyy")</small>
+                                    </td>
+                                    <td>
+                                        @if (claim.ReviewedAt.HasValue)
+                                        {
+                                            <small class="text-muted">@claim.ReviewedAt.Value.ToString("MMM dd, yyyy")</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
                                     </td>
                                     <td>
                                         @if (claim.Status == "Pending")
                                         {
                                             <div class="btn-group btn-group-sm">
-                                                <form method="post" asp-action="Approve" class="d-inline">
-                                                    @Html.AntiForgeryToken()
-                                                    <input type="hidden" name="id" value="@claim.Id" />
-                                                    <button type="submit" class="btn btn-success btn-sm"
-                                                            onclick="return confirm('Approve this claim?')">
-                                                        <i class="fas fa-check"></i>
-                                                    </button>
-                                                </form>
-                                                <form method="post" asp-action="Reject" class="d-inline">
-                                                    @Html.AntiForgeryToken()
-                                                    <input type="hidden" name="id" value="@claim.Id" />
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Reject this claim?')">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </form>
+                                                <a asp-action="Approve" asp-route-id="@claim.Id" class="btn btn-success btn-sm"
+                                                   onclick="return confirm('Approve this claim?')">
+                                                    <i class="fas fa-check"></i>
+                                                </a>
+                                                <a asp-action="Reject" asp-route-id="@claim.Id" class="btn btn-danger btn-sm"
+                                                   onclick="return confirm('Reject this claim?')">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
                                             </div>
                                         }
                                         else
@@ -154,7 +159,7 @@
 
 <style>
     .hero {
-        background: url('/Images/coord view claims.jpg') no-repeat center center;
+        background: url('/Images/CoordGradient2.jpg') no-repeat center center;
         background-size: cover;
         min-height: 100vh;
         padding: 2rem 0;

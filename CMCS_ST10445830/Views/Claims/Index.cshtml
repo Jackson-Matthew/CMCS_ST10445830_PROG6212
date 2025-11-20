@@ -25,67 +25,159 @@
             </div>
         }
 
-        <div class="card shadow-lg border-0">
-            <div class="card-body">
-                <table class="table table-striped table-hover align-middle">
-                    <thead class="table-success">
-                        <tr>
-                            <th>Month</th>
-                            <th>Hours Worked</th>
-                            <th>Hourly Rate</th>
-                            <th>Total</th>
-                            <th>Notes</th>
-                            <th>Document</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var claim in Model)
-                        {
-                            <tr>
-                                <td>@claim.Month</td>
-                                <td>@claim.HoursWorked</td>
-                                <td>@claim.HourlyRate.ToString("C")</td>
-                                <td>@claim.TotalAmount.ToString("C")</td>
-                                <td>@claim.Notes</td>
-                                <td>
-                                    @if (!string.IsNullOrEmpty(claim.DocumentUrl))
-                                    {
-                                        <a href="@claim.DocumentUrl" target="_blank" class="btn btn-sm btn-outline-primary">View</a>
-                                    }
-                                    else
-                                    {
-                                        <span class="text-muted">No document</span>
-                                    }
-                                </td>
-                                <td>
-                                    @if (claim.Status == "Pending")
-                                    {
-                                        <span class="badge bg-warning text-dark">@claim.Status</span>
-                                    }
-                                    else if (claim.Status == "Approved")
-                                    {
-                                        <span class="badge bg-success">@claim.Status</span>
-                                    }
-                                    else if (claim.Status == "Rejected")
-                                    {
-                                        <span class="badge bg-danger">@claim.Status</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-secondary">@claim.Status</span>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white text-center">
+                    <div class="card-body">
+                        <h4 class="mb-0">@Model.Count()</h4>
+                        <small>Total Claims</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-dark text-center">
+                    <div class="card-body">
+                        <h4 class="mb-0">@Model.Count(c => c.Status == "Pending")</h4>
+                        <small>Pending</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white text-center">
+                    <div class="card-body">
+                        <h4 class="mb-0">@Model.Count(c => c.Status == "Approved")</h4>
+                        <small>Approved</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-danger text-white text-center">
+                    <div class="card-body">
+                        <h4 class="mb-0">@Model.Count(c => c.Status == "Rejected")</h4>
+                        <small>Rejected</small>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="mt-3 text-center">
-            <a asp-controller="Dashboard" asp-action="LecturerDashboard" class="btn btn-secondary">
-                <i class="fas fa-home"></i> Back to Dashboard
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-history me-2"></i>Claim History
+                    <span class="badge bg-light text-dark ms-2">@Model.Count() claims</span>
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (!Model.Any())
+                {
+                    <div class="text-center py-4">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No claims submitted yet</h5>
+                        <p class="text-muted">Submit your first claim to get started</p>
+                        <a asp-action="Create" class="btn btn-success">
+                            <i class="fas fa-plus me-2"></i>Submit New Claim
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Submitted Date</th>
+                                    <th>Hours Worked</th>
+                                    <th>Hourly Rate</th>
+                                    <th>Total Amount</th>
+                                    <th>Document</th>
+                                    <th>Status</th>
+                                    <th>Reviewed Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var claim in Model.OrderByDescending(c => c.SubmittedAt))
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@claim.SubmittedAt.ToString("MMM dd, yyyy")</strong>
+                                            <br />
+                                            <small class="text-muted">@claim.SubmittedAt.ToString("hh:mm tt")</small>
+                                        </td>
+                                        <td>@claim.HoursWorked</td>
+                                        <td>@claim.HourlyRateAtSubmission.ToString("C")</td>
+                                        <td><strong>@claim.TotalAmount.ToString("C")</strong></td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(claim.DocumentationPath))
+                                            {
+                                                <a href="/documents/@claim.DocumentationPath" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-file me-1"></i>View
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">No document</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (claim.Status == "Pending")
+                                            {
+                                                <span class="badge bg-warning text-dark">
+                                                    <i class="fas fa-clock me-1"></i>@claim.Status
+                                                </span>
+                                            }
+                                            else if (claim.Status == "Approved")
+                                            {
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-check me-1"></i>@claim.Status
+                                                </span>
+                                            }
+                                            else if (claim.Status == "Rejected")
+                                            {
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-times me-1"></i>@claim.Status
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">@claim.Status</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (claim.ReviewedAt.HasValue)
+                                            {
+                                                <small class="text-muted">
+                                                    @claim.ReviewedAt.Value.ToString("MMM dd, yyyy")
+                                                    <br />
+                                                    @claim.ReviewedAt.Value.ToString("hh:mm tt")
+                                                </small>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">-</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a asp-action="Details" asp-route-id="@claim.Id" class="btn btn-sm btn-outline-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <a asp-action="Create" class="btn btn-success me-2">
+                <i class="fas fa-plus me-2"></i>Submit New Claim
+            </a>
+            <a asp-controller="Dashboard" asp-action="LecturerDashboard" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
             </a>
         </div>
     </div>
@@ -95,5 +187,16 @@
     .hero {
         background: url('/Images/claims bg.jpg') no-repeat center center;
         background-size: cover;
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .table th {
+        border-top: none;
+        font-weight: 600;
     }
 </style>

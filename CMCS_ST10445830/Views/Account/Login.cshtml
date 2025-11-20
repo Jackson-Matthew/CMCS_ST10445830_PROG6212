@@ -1,31 +1,11 @@
-﻿@{
+﻿@model CMCS_ST10445830.Models.LoginViewModel
+@{
     ViewData["Title"] = "Login";
 }
 
-<div class="hero d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow-lg border-0 p-4" style="max-width: 420px; width: 100%;">
-        <div class="card-body">
-            <h2 class="text-center mb-4 fw-bold">Lecturer & Coordinator Login</h2>
-            <form asp-action="Login" method="post">
-                <div class="mb-3">
-                    <label class="form-label fw-medium">Username</label>
-                    <input type="text" name="username" class="form-control rounded-3" required />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-medium">Password</label>
-                    <input type="password" name="password" class="form-control rounded-3" required />
-                </div>
-                <button type="submit" class="btn btn-success w-100 rounded-3">
-                    Login
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-
 <style>
     .hero {
-        background: url('/Images/login gradient.jpg') no-repeat center center;
+        background: url('/Images/LoginGradient1.jpg') no-repeat center center;
         background-size: cover;
         min-height: 100vh;
         width: 100%;
@@ -41,4 +21,114 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
+
+    .card-header {
+        border-radius: 1rem 1rem 0 0 !important;
+    }
+
+    .form-control {
+        padding: 0.75rem;
+    }
+
+        .form-control:focus {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+        }
+
+    .form-group.focused label {
+        color: #198754;
+        font-weight: 500;
+    }
+
+    .alert {
+        border-radius: 0.5rem;
+        border: none;
+    }
 </style>
+
+<div class="hero d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg border-0" style="max-width: 450px; width: 100%;">
+        <div class="card-header bg-dark text-white text-center py-3">
+            <h4 class="mb-0"><i class="fas fa-user-lock me-2"></i>Lecturer & Coordinator Login</h4>
+        </div>
+        <div class="card-body p-4">
+            <!-- Show error or success messages -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">@TempData["Success"]</div>
+            }
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+
+            <form asp-action="Login" method="post">
+                <div class="form-group mb-3">
+                    <label asp-for="Username" class="form-label fw-medium">Username</label>
+                    <input asp-for="Username" class="form-control rounded-3" placeholder="Enter your username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Password" class="form-label fw-medium">Password</label>
+                    <input asp-for="Password" class="form-control rounded-3" type="password" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Role" class="form-label fw-medium">Select Role</label>
+                    <select asp-for="Role" class="form-control rounded-3">
+                        <option value="">—— Select Role ——</option>
+                        <option value="Lecturer">Lecturer</option>
+                        <option value="Academic coordinator">Academic Coordinator</option>
+                        <option value="HR">HR Manager</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 rounded-3 py-2 fw-medium">
+                    Login
+                </button>
+            </form>
+
+            <div class="mt-3 text-center">
+                <p class="mb-0">
+                    Need assistance?
+                    <a href="#" class="fw-bold text-decoration-none">Contact support</a>
+                </p>
+            </div>
+        </div>
+        <div class="card-footer text-center text-muted small py-3">
+            &copy; 2025 - Academic Portal
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function() {
+            // Add focus effects to form inputs
+            $('.form-control').focus(function() {
+                $(this).parent().addClass('focused');
+            }).blur(function() {
+                if ($(this).val() === '') {
+                    $(this).parent().removeClass('focused');
+                }
+            });
+
+            // Clear validation messages when user starts typing
+            $('.form-control').on('input', function() {
+                var validationSpan = $(this).siblings('.text-danger');
+                if ($(this).val().trim() !== '') {
+                    validationSpan.hide();
+                }
+            });
+        });
+    </script>
+}

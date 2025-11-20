@@ -6,44 +6,176 @@
 
 <div class="hero d-flex justify-content-center align-items-center min-vh-100">
     <div class="container">
-        <h2 class="mb-4 text-center text-white">
-            <i class="fas fa-clipboard-list"></i> All Lecturer Claims
-        </h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-white mb-0">
+                <i class="fas fa-clipboard-list"></i> All Lecturer Claims
+            </h2>
+            <a asp-controller="Dashboard" asp-action="CoordinatorDashboard" class="btn btn-outline-light">
+                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Statistics -->
+        @{
+            var pending = Model.Count(c => c.Status == "Pending");
+            var approved = Model.Count(c => c.Status == "Approved");
+            var rejected = Model.Count(c => c.Status == "Rejected");
+            var total = Model.Count();
+        }
+
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white text-center">
+                    <div class="card-body py-3">
+                        <h4 class="mb-0">@total</h4>
+                        <small>Total Claims</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-dark text-center">
+                    <div class="card-body py-3">
+                        <h4 class="mb-0">@pending</h4>
+                        <small>Pending Review</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white text-center">
+                    <div class="card-body py-3">
+                        <h4 class="mb-0">@approved</h4>
+                        <small>Approved</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-danger text-white text-center">
+                    <div class="card-body py-3">
+                        <h4 class="mb-0">@rejected</h4>
+                        <small>Rejected</small>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="card shadow-lg border-0">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-list-check me-2"></i>Claims Overview
+                    <span class="badge bg-light text-dark ms-2">@Model.Count() claims</span>
+                </h5>
+            </div>
             <div class="card-body">
-                <table class="table table-hover align-middle">
-                    <thead class="table-success">
-                        <tr>
-                            <th>ID</th>
-                            <th>Lecturer</th>
-                            <th>Hours Worked</th>
-                            <th>Hourly Rate</th>
-                            <th>Notes</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var claim in Model)
-                        {
-                            <tr>
-                                <td>@claim.Id</td>
-                                <td>@claim.LecturerName</td>
-                                <td>@claim.HoursWorked</td>
-                                <td>@claim.HourlyRate.ToString("C")</td>
-                                <td>@claim.Notes</td>
-                                <td>
-                                    <span class="badge
-                                            @(claim.Status == "Approved" ? "bg-success"
-                                                                                  : claim.Status == "Pending" ? "bg-warning text-dark"
-                                                                                  : "bg-primary")">
-                                    @claim.Status
-                                </span>
-                            </td>
-                        </tr>
+                @if (!Model.Any())
+                {
+                    <div class="text-center py-4">
+                        <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No claims submitted yet</h5>
+                        <p class="text-muted">Claims will appear here when lecturers submit them</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Lecturer</th>
+                                    <th>Hours</th>
+                                    <th>Rate</th>
+                                    <th>Total</th>
+                                    <th>Document</th>
+                                    <th>Status</th>
+                                    <th>Submitted</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var claim in Model.OrderByDescending(c => c.SubmittedAt))
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>#@claim.Id</strong>
+                                        </td>
+                                        <td>
+                                            <strong>@(claim.Lecturer?.Username ?? "Unknown Lecturer")</strong>
+                                            @if (claim.Coordinator != null)
+                                            {
+                                                <br />
+                                                <small class="text-muted">Reviewed by: @claim.Coordinator.Username</small>
+                                            }
+                                        </td>
+                                        <td>@claim.HoursWorked</td>
+                                        <td>@claim.HourlyRateAtSubmission.ToString("C")</td>
+                                        <td><strong>@claim.TotalAmount.ToString("C")</strong></td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(claim.DocumentationPath))
+                                            {
+                                                <a href="/documents/@claim.DocumentationPath" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-file me-1"></i>View
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">No document</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (claim.Status == "Pending")
+                                            {
+                                                <span class="badge bg-warning text-dark">
+                                                    <i class="fas fa-clock me-1"></i>@claim.Status
+                                                </span>
+                                            }
+                                            else if (claim.Status == "Approved")
+                                            {
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-check me-1"></i>@claim.Status
+                                                </span>
+                                            }
+                                            else if (claim.Status == "Rejected")
+                                            {
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-times me-1"></i>@claim.Status
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-secondary">@claim.Status</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">
+                                                @claim.SubmittedAt.ToString("MMM dd, yyyy")
+                                                <br />
+                                                @claim.SubmittedAt.ToString("hh:mm tt")
+                                            </small>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <a asp-action="Details" asp-route-id="@claim.Id" class="btn btn-outline-info" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                @if (claim.Status == "Pending")
+                                                {
+                                                    <a asp-action="Approve" asp-route-id="@claim.Id" class="btn btn-outline-success"
+                                                       title="Approve Claim" onclick="return confirm('Approve this claim?')">
+                                                        <i class="fas fa-check"></i>
+                                                    </a>
+                                                    <a asp-action="Reject" asp-route-id="@claim.Id" class="btn btn-outline-danger"
+                                                       title="Reject Claim" onclick="return confirm('Reject this claim?')">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
                                                 }
-                    </tbody>
-                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -54,6 +186,20 @@
         background: url('/Images/coord view claims.jpg') no-repeat center center;
         background-size: cover;
         min-height: 100vh;
-        padding: 2rem;
+        padding: 2rem 0;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .table th {
+        border-top: none;
+        font-weight: 600;
+        background-color: #f8f9fa;
+    }
+
+    .btn-group-sm > .btn {
+        padding: 0.25rem 0.5rem;
     }
 </style>

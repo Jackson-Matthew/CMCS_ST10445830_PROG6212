@@ -8,48 +8,151 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CMCS_ST10445830.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item mx-5">
-                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item mx-5">
-                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Login" asp-action="Login">Dashboard</a>
-                    </li>
-                    <li class="nav-item mx-5">
-                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Claims" asp-action="Create">Submit A Claim</a>
-                    </li>
-                    <li class="nav-item mx-5">
-                        <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="ManageApprovals" asp-action="Index">Manage Approvals</a>
-                    </li>
-                    <li class="nav-item mx-5">
-                        <a class="btn btn-dark no-hover" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                    </li>
-                </ul>
+            <div class="container">
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-university me-2"></i>Academic Claims
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item mx-3">
+                            <a class="nav-link text-dark fw-bold" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <!-- Show Dashboard link only when logged in -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item mx-3">
+                                <a class="nav-link text-dark fw-bold" asp-controller="Dashboard" asp-action="@GetDashboardAction()">Dashboard</a>
+                            </li>
+
+                            <!-- Show Submit Claim only for Lecturers -->
+                            @if (User.IsInRole("Lecturer"))
+                            {
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link text-dark fw-bold" asp-controller="Claims" asp-action="Create">Submit A Claim</a>
+                                </li>
+                            }
+
+                            <!-- Show Manage Approvals only for Academic Coordinators -->
+                            @if (User.IsInRole("Academic coordinator"))
+                            {
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link text-dark fw-bold" asp-controller="Claims" asp-action="Manage">Manage Approvals</a>
+                                </li>
+                            }
+
+                            <!-- Show View All Claims for Coordinators and HR -->
+                            @if (User.IsInRole("Academic coordinator") || User.IsInRole("HR"))
+                            {
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link text-dark fw-bold" asp-controller="Claims" asp-action="ViewAll">View All Claims</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+
+                    <!-- User Info and Logout Section -->
+                    <ul class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle me-1"></i>
+                                    @User.Identity.Name
+                                    <small class="text-muted ms-1">(@GetUserRoleDisplay())</small>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" asp-controller="Dashboard" asp-action="@GetDashboardAction()">
+                                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-dark" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt me-1"></i>Login
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
 
     <footer>
         <div class="border-top footer text-start fw-bold">
             &copy; 2025 - Copyright - See how CMCS protects your privacy --> <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-
     </footer>
-    <main role="main">
-        @RenderBody()
-    </main>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // Initialize Bootstrap dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+            var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+                return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+@functions {
+    private string GetDashboardAction()
+    {
+        if (User.IsInRole("Lecturer"))
+            return "LecturerDashboard";
+        else if (User.IsInRole("Academic coordinator"))
+            return "CoordinatorDashboard";
+        else if (User.IsInRole("HR"))
+            return "HRDashboard";
+        else
+            return "Index";
+    }
+
+    private string GetUserRoleDisplay()
+    {
+        if (User.IsInRole("Lecturer"))
+            return "Lecturer";
+        else if (User.IsInRole("Academic coordinator"))
+            return "Academic Coordinator";
+        else if (User.IsInRole("HR"))
+            return "HR Manager";
+        else
+            return "User";
+    }
+}

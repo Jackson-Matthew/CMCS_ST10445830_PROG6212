@@ -1,26 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using CMCS_ST10445830.Data;
 using CMCS_ST10445830.Models;
-using CMCS_ST10445830.Services;
 
 namespace CMCS_ST10445830.Controllers
 {
     public class ManageApprovalsController : Controller
     {
-        private readonly IInMemoryStorageService _storageService;
+        private readonly AuthDbContext _context;
         private readonly ILogger<ManageApprovalsController> _logger;
 
-        public ManageApprovalsController(IInMemoryStorageService storageService, ILogger<ManageApprovalsController> logger)
+        public ManageApprovalsController(AuthDbContext context, ILogger<ManageApprovalsController> logger)
         {
-            _storageService = storageService ?? throw new ArgumentNullException(nameof(storageService));
+            _context = context;
             _logger = logger;
         }
 
+        // Shows only pending claims
         public async Task<IActionResult> Index()
         {
             try
             {
-                var claims = await _storageService.GetAllClaimsAsync();
-                var pendingClaims = claims.Where(c => c.Status == "Pending").ToList();
+                var pendingClaims = await _context.Claims
+                    .Where(c => c.Status == "Pending")
+                    .ToListAsync();
+
                 return View(pendingClaims);
             }
             catch (Exception ex)
@@ -31,12 +35,13 @@ namespace CMCS_ST10445830.Controllers
             }
         }
 
+        // Shows all claims (approved, rejected, pending)
         public async Task<IActionResult> AllClaims()
         {
             try
             {
-                var claims = await _storageService.GetAllClaimsAsync();
-                return View(claims);
+                var allClaims = await _context.Claims.ToListAsync();
+                return View(allClaims);
             }
             catch (Exception ex)
             {
@@ -46,54 +51,66 @@ namespace CMCS_ST10445830.Controllers
             }
         }
 
+        // Approve a claim
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Approve(string id)
+        public async Task<IActionResult> Approve(int id)
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                TempData["ErrorMessage"] = "⚠️ Invalid claim ID.";
-                return RedirectToAction("Index");
-            }
-
             try
             {
-                await _storageService.UpdateClaimStatusAsync(id, "Approved");
+                var claim = await _context.Claims.FindAsync(id);
+
+                if (claim == null)
+                {
+                    TempData["ErrorMessage"] = "⚠️ Claim not found.";
+                    return RedirectToAction("Index");
+                }
+
+                claim.Status = "Approved";
+                await _context.SaveChangesAsync();
+
                 TempData["SuccessMessage"] = "✅ Claim approved successfully!";
-                _logger.LogInformation($"Claim {id} approved by coordinator");
+                _logger.LogInformation($"Claim {id} approved");
+
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = $"❌ Error approving claim: {ex.Message}";
                 _logger.LogError(ex, $"Error approving claim {id}");
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reject(string id)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                TempData["ErrorMessage"] = "⚠️ Invalid claim ID.";
                 return RedirectToAction("Index");
             }
+        }
 
+        // Reject a claim
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reject(int id)
+        {
             try
             {
-                await _storageService.UpdateClaimStatusAsync(id, "Rejected");
+                var claim = await _context.Claims.FindAsync(id);
+
+                if (claim == null)
+                {
+                    TempData["ErrorMessage"] = "⚠️ Claim not found.";
+                    return RedirectToAction("Index");
+                }
+
+                claim.Status = "Rejected";
+                await _context.SaveChangesAsync();
+
                 TempData["SuccessMessage"] = "🚫 Claim rejected successfully!";
-                _logger.LogInformation($"Claim {id} rejected by coordinator");
+                _logger.LogInformation($"Claim {id} rejected");
+
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = $"❌ Error rejecting claim: {ex.Message}";
                 _logger.LogError(ex, $"Error rejecting claim {id}");
+                return RedirectToAction("Index");
             }
-
-            return RedirectToAction("Index");
         }
     }
 }

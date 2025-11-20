@@ -11,7 +11,7 @@
                 <i class="fas fa-clipboard-check"></i> Manage Claim Approvals
             </h2>
             <a asp-controller="Dashboard" asp-action="CoordinatorDashboard" class="btn btn-outline-light">
-                <i class="fas fa-arrow-left"></i> Back to Dashboard
+                <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
             </a>
         </div>
 
@@ -19,7 +19,7 @@
         @if (TempData["SuccessMessage"] != null)
         {
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         }
@@ -27,7 +27,7 @@
         @if (TempData["ErrorMessage"] != null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="fas fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+                <i class="fas fa-exclamation-circle me-2"></i> @TempData["ErrorMessage"]
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         }
@@ -39,8 +39,8 @@
                     <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
                     <h4 class="text-muted">No Pending Claims</h4>
                     <p class="text-muted">There are no claims waiting for approval at the moment.</p>
-                    <a asp-action="AllClaims" class="btn btn-primary">
-                        <i class="fas fa-list"></i> View All Claims
+                    <a asp-action="ViewAll" class="btn btn-primary">
+                        <i class="fas fa-list me-2"></i> View All Claims
                     </a>
                 </div>
             </div>
@@ -51,11 +51,11 @@
                 <div class="card-header bg-primary text-white">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
-                            <i class="fas fa-clock"></i> Pending Claims (@Model.Count())
+                            <i class="fas fa-clock me-2"></i> Pending Claims (@Model.Count())
                         </h5>
                         <div>
-                            <a asp-action="AllClaims" class="btn btn-sm btn-outline-light">
-                                <i class="fas fa-list"></i> View All Claims
+                            <a asp-action="ViewAll" class="btn btn-sm btn-outline-light">
+                                <i class="fas fa-list me-2"></i> View All Claims
                             </a>
                         </div>
                     </div>
@@ -66,46 +66,34 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>Lecturer</th>
-                                    <th>Month</th>
                                     <th>Hours</th>
                                     <th>Rate</th>
                                     <th>Total Amount</th>
-                                    <th>Notes</th>
                                     <th>Document</th>
                                     <th>Submitted</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var claim in Model)
+                                @foreach (var claim in Model.OrderByDescending(c => c.SubmittedAt))
                                 {
                                     <tr>
                                         <td>
-                                            <strong>@claim.LecturerName</strong>
+                                            <strong>@(claim.Lecturer?.Username ?? "Unknown Lecturer")</strong>
+                                            <br />
+                                            <small class="text-muted">ID: #@claim.Id</small>
                                         </td>
-                                        <td>@claim.Month</td>
                                         <td>@claim.HoursWorked</td>
-                                        <td>@claim.HourlyRate.ToString("C")</td>
+                                        <td>@claim.HourlyRateAtSubmission.ToString("C")</td>
                                         <td>
                                             <strong class="text-success">@claim.TotalAmount.ToString("C")</strong>
                                         </td>
                                         <td>
-                                            @if (!string.IsNullOrEmpty(claim.Notes))
+                                            @if (!string.IsNullOrEmpty(claim.DocumentationPath))
                                             {
-                                                <span class="text-truncate" style="max-width: 150px;"
-                                                      title="@claim.Notes">@claim.Notes</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="text-muted">No notes</span>
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (!string.IsNullOrEmpty(claim.DocumentUrl))
-                                            {
-                                                <a href="@claim.DocumentUrl" target="_blank"
+                                                <a href="/documents/@claim.DocumentationPath" target="_blank"
                                                    class="btn btn-sm btn-outline-primary" title="View Document">
-                                                    <i class="fas fa-file"></i> View
+                                                    <i class="fas fa-file me-1"></i> View
                                                 </a>
                                             }
                                             else
@@ -114,26 +102,31 @@
                                             }
                                         </td>
                                         <td>
-                                            <small class="text-muted">@claim.CreatedDate.ToString("MMM dd, yyyy")</small>
+                                            <small class="text-muted">
+                                                @claim.SubmittedAt.ToString("MMM dd, yyyy")
+                                                <br />
+                                                @claim.SubmittedAt.ToString("hh:mm tt")
+                                            </small>
                                         </td>
                                         <td class="text-center">
-                                            <div class="btn-group btn-group-sm" role="group">
-                                                <form method="post" asp-action="Approve" class="d-inline">
-                                                    @Html.AntiForgeryToken()
-                                                    <input type="hidden" name="id" value="@claim.Id" />
-                                                    <button type="submit" class="btn btn-success"
-                                                            title="Approve Claim" onclick="return confirm('Approve this claim?')">
-                                                        <i class="fas fa-check"></i> Approve
-                                                    </button>
-                                                </form>
-                                                <form method="post" asp-action="Reject" class="d-inline">
-                                                    @Html.AntiForgeryToken()
-                                                    <input type="hidden" name="id" value="@claim.Id" />
-                                                    <button type="submit" class="btn btn-danger"
-                                                            title="Reject Claim" onclick="return confirm('Reject this claim?')">
-                                                        <i class="fas fa-times"></i> Reject
-                                                    </button>
-                                                </form>
+                                            <div class="btn-group-vertical btn-group-sm" role="group">
+                                                <a asp-action="Approve" asp-route-id="@claim.Id"
+                                                   class="btn btn-success btn-sm"
+                                                   title="Approve Claim"
+                                                   onclick="return confirm('Are you sure you want to APPROVE this claim?')">
+                                                    <i class="fas fa-check me-1"></i> Approve
+                                                </a>
+                                                <a asp-action="Reject" asp-route-id="@claim.Id"
+                                                   class="btn btn-danger btn-sm mt-1"
+                                                   title="Reject Claim"
+                                                   onclick="return confirm('Are you sure you want to REJECT this claim?')">
+                                                    <i class="fas fa-times me-1"></i> Reject
+                                                </a>
+                                                <a asp-action="Details" asp-route-id="@claim.Id"
+                                                   class="btn btn-info btn-sm mt-1"
+                                                   title="View Details">
+                                                    <i class="fas fa-eye me-1"></i> Details
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -158,6 +151,7 @@
     .table th {
         border-top: none;
         font-weight: 600;
+        background-color: #f8f9fa;
     }
 
     .card {
@@ -165,7 +159,27 @@
         border-radius: 15px;
     }
 
-    .btn-group .btn {
-        margin: 0 2px;
+    .btn-group-vertical .btn {
+        margin: 2px 0;
+        text-align: left;
+    }
+
+    .table td {
+        vertical-align: middle;
     }
 </style>
+
+@section Scripts {
+    <script>
+        // Auto-dismiss alerts after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 5000);
+            });
+        });
+    </script>
+}
