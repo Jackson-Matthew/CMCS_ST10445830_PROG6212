@@ -87,7 +87,7 @@
                                         <small class="text-muted">Coord: @(claim.Coordinator?.Username ?? "Pending")</small>
                                     </td>
                                     <td>@claim.HoursWorked</td>
-                                    <td>@claim.HourlyRateAtSubmission.ToString("C")</td>
+                                    <td>@claim.HourlyRate.ToString("C")</td>
                                     <td><strong>@claim.TotalAmount.ToString("C")</strong></td>
                                     <td>
                                         @if (claim.Status == "Pending")

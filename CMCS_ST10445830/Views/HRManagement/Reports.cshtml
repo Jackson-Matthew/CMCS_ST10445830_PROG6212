@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CMCS_ST10445830.Models.Claim>
+
+@{
+    ViewData["Title"] = "Claims Reports";
+}
+
+<div class="container mt-4">
+    <h2><i class="fas fa-chart-bar"></i> Claims Reports</h2>
+
+    <div class="card shadow mt-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Generate Report</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="GenerateInvoice" method="post" class="row g-3">
+                <div class="col-md-5">
+                    <label for="startDate" class="form-label">Start Date</label>
+                    <input type="date" name="startDate" class="form-control" />
+                </div>
+                <div class="col-md-5">
+                    <label for="endDate" class="form-label">End Date</label>
+                    <input type="date" name="endDate" class="form-control" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="fas fa-download"></i> Download CSV
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow mt-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Approved Claims Summary</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Lecturer</th>
+                            <th>Hours</th>
+                            <th>Rate</th>
+                            <th>Total</th>
+                            <th>Submitted</th>
+                            <th>Approved By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var claim in Model)
+                        {
+                            <tr>
+                                <td>@(claim.Lecturer?.UserProfile?.FirstName + " " + claim.Lecturer?.UserProfile?.LastName)</td>
+                                <td>@claim.HoursWorked</td>
+                                <td>@claim.HourlyRate.ToString("C")</td>
+                                <td><strong>@claim.TotalAmount.ToString("C")</strong></td>
+                                <td>@claim.SubmittedAt.ToString("MMM dd, yyyy")</td>
+                                <td>@(claim.Coordinator?.UserProfile != null ? claim.Coordinator.UserProfile.FirstName + " " + claim.Coordinator.UserProfile.LastName : "N/A")</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-dark">
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>@Model.Sum(c => c.HoursWorked)</strong></td>
+                            <td></td>
+                            <td><strong>@Model.Sum(c => c.TotalAmount).ToString("C")</strong></td>
+                            <td colspan="2"><strong>@Model.Count() claims</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-controller="Dashboard" asp-action="HRDashboard" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>

@@ -7,7 +7,6 @@ namespace CMCS_ST10445830.Models
     public class User
     {
         [Key]
-
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Username is required")]
@@ -19,12 +18,14 @@ namespace CMCS_ST10445830.Models
         [MaxLength(256)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(20)]
         [Display(Name = "Role")]
+        public string Role { get; set; } = "Lecturer";
 
-        public string Role { get; set; } = "Customer";
+        // Navigation property
+        public virtual UserProfile? UserProfile { get; set; }
     }
 }

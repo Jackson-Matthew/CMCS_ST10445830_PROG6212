@@ -51,6 +51,15 @@
                                 </li>
                             }
 
+                            @if (User.IsInRole("HR"))
+                            {
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link text-dark fw-bold" asp-controller="HRManagement" asp-action="Index">User Management</a>
+                                </li>
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link text-dark fw-bold" asp-controller="HRManagement" asp-action="Reports">Reports</a>
+                                </li>
+                            }
                             <!-- Show View All Claims for Coordinators and HR -->
                             @if (User.IsInRole("Academic coordinator") || User.IsInRole("HR"))
                             {

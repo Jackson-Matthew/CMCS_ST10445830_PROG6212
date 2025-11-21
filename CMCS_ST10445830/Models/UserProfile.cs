@@ -7,26 +7,30 @@ namespace CMCS_ST10445830.Models
     {
         [Key]
         [ForeignKey("User")]
-        public int UserId { get; set; }   // Primary Key + FK to Users.Id
+        public int UserId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "First name is required")]
         [MaxLength(100)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "Last name is required")]
         [MaxLength(100)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; } = string.Empty;
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
         [MaxLength(100)]
         public string Email { get; set; } = string.Empty;
 
-        // Lecturers will have this, admins may have NULL
+        [Required(ErrorMessage = "Hourly rate is required")]
+        [Range(0.01, 1000, ErrorMessage = "Hourly rate must be between 0.01 and 1000")]
         [Column(TypeName = "decimal(10,2)")]
-        public decimal? HourlyRate { get; set; }
+        [Display(Name = "Hourly Rate")]
+        public decimal HourlyRate { get; set; }
 
-        // Navigation Property
-        public User? User { get; set; }
+        // Navigation property
+        public virtual User User { get; set; }
     }
 }

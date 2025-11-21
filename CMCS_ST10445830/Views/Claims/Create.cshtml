@@ -7,36 +7,52 @@
 <div class="hero d-flex justify-content-center align-items-center min-vh-100">
     <div class="container">
         <div class="row justify-content-center g-4">
+
             <!-- Form Card -->
             <div class="col-lg-6 col-md-8">
                 <div class="card shadow-lg border-0 p-4" style="background: rgba(255,255,255,0.9);">
                     <div class="card-body">
                         <h2 class="text-center mb-4 fw-bold text-success">Submit Your Claim</h2>
 
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                @TempData["ErrorMessage"]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        }
+
                         <form asp-action="Create" method="post" enctype="multipart/form-data">
                             @Html.AntiForgeryToken()
 
+                            <!-- Hours Worked -->
                             <div class="mb-3">
                                 <label asp-for="HoursWorked" class="form-label fw-medium">Hours Worked</label>
-                                <input asp-for="HoursWorked" type="number" step="0.1" min="1" max="9999" class="form-control rounded-3" />
+                                <input asp-for="HoursWorked" type="number" step="0.1" min="1" max="9999" id="HoursWorked" class="form-control rounded-3" />
                                 <span asp-validation-for="HoursWorked" class="text-danger"></span>
                                 <small class="text-muted">Enter total hours worked (minimum 1 hour)</small>
                             </div>
 
+                            <!-- Hourly Rate (read-only) -->
                             <div class="mb-3">
-                                <label asp-for="HourlyRateAtSubmission" class="form-label fw-medium">Hourly Rate</label>
-                                <input asp-for="HourlyRateAtSubmission" type="number" step="0.01" min="0.01" max="10000" class="form-control rounded-3" />
-                                <span asp-validation-for="HourlyRateAtSubmission" class="text-danger"></span>
-                                <small class="text-muted">Enter your hourly rate</small>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label fw-medium">Total Amount</label>
+                                <label class="form-label fw-medium">Your Hourly Rate</label>
                                 <input type="text" class="form-control rounded-3 bg-light" readonly
-                                       value="Will be calculated automatically: (Hours × Rate)" />
-                                <small class="text-muted">Total amount is calculated automatically</small>
+                                       value="@(ViewBag.UserHourlyRate?.ToString("C") ?? "Not set - Please contact HR")" />
+                                <small class="text-muted">Your hourly rate is set by HR and cannot be changed</small>
                             </div>
 
+                            <!-- Hidden field for HourlyRateAtSubmission - will be set by controller -->
+                            <input type="hidden" id="HourlyRateAtSubmission" name="HourlyRateAtSubmission" value="@ViewBag.UserHourlyRate" />
+
+                            <!-- Estimated Total (visible only) -->
+                            <div class="mb-3">
+                                <label class="form-label fw-medium">Estimated Total Amount</label>
+                                <input type="text" class="form-control rounded-3 bg-light" readonly
+                                       id="estimatedTotal" value="Enter hours to see total" />
+                                <small class="text-muted">Total will be calculated automatically</small>
+                            </div>
+
+                            <!-- Supporting Document -->
                             <div class="mb-3">
                                 <label asp-for="DocumentFile" class="form-label fw-medium">Supporting Document</label>
                                 <input asp-for="DocumentFile" type="file" class="form-control rounded-3" />
@@ -48,6 +64,7 @@
                                 <i class="fas fa-paper-plane me-2"></i>Submit Claim
                             </button>
                         </form>
+
                         <div class="mt-3 text-center">
                             <a asp-controller="Dashboard" asp-action="LecturerDashboard" class="btn btn-outline-secondary">
                                 <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
@@ -57,24 +74,28 @@
                 </div>
             </div>
 
+            <!-- Instructions Card -->
             <div class="col-lg-4 col-md-8">
                 <div class="card shadow-lg border-0 p-4" style="background: rgba(255,255,255,0.9);">
                     <div class="card-body">
                         <h4 class="fw-bold text-dark mb-3">📌 Instructions</h4>
                         <p class="text-muted">Please fill out the form to submit your claim. Ensure all information is accurate before submitting.</p>
+
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item bg-transparent">✅ Enter the total hours that you have worked</li>
-                            <li class="list-group-item bg-transparent">✅ Provide your current hourly rate</li>
+                            <li class="list-group-item bg-transparent">✅ Your hourly rate is set by HR and cannot be changed</li>
                             <li class="list-group-item bg-transparent">✅ Total amount is calculated automatically</li>
                             <li class="list-group-item bg-transparent">✅ Upload supporting documents if available</li>
                             <li class="list-group-item bg-transparent">✅ Claims are submitted for immediate review</li>
                         </ul>
+
                         <div class="alert alert-info mt-3">
-                            <strong>💡 Tip:</strong> Double check your hours and rate before submitting — claims can be submitted at any time.
+                            <strong>💡 Note:</strong> If your hourly rate is not set or incorrect, please contact HR to update your profile.
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -100,26 +121,31 @@
     }
 
     <script>
-        // Real-time total amount calculation
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const hoursInput = document.querySelector('#HoursWorked');
-            const rateInput = document.querySelector('#HourlyRateAtSubmission');
-            const totalDisplay = document.querySelector('input[readonly]');
+            const hourlyRate = @(ViewBag.UserHourlyRate ?? 0);
+            const totalDisplay = document.querySelector('#estimatedTotal');
+            const hourlyRateInput = document.querySelector('#HourlyRateAtSubmission');
 
             function calculateTotal() {
                 const hours = parseFloat(hoursInput.value) || 0;
-                const rate = parseFloat(rateInput.value) || 0;
-                const total = hours * rate;
+                const total = hours * hourlyRate;
 
-                if (total > 0) {
-                    totalDisplay.value = `Total: $${total.toFixed(2)} (${hours} hours × $${rate.toFixed(2)}/hour)`;
+                if (total > 0 && hourlyRate > 0) {
+                    totalDisplay.value = `Total: $${total.toFixed(2)} (${hours} hours × $${hourlyRate.toFixed(2)}/hour)`;
+                    // Update the hidden hourly rate field
+                    hourlyRateInput.value = hourlyRate;
+                } else if (hourlyRate <= 0) {
+                    totalDisplay.value = 'Hourly rate not set - contact HR';
+                    hourlyRateInput.value = '0';
                 } else {
-                    totalDisplay.value = 'Will be calculated automatically: (Hours × Rate)';
+                    totalDisplay.value = 'Enter hours to see total';
+                    hourlyRateInput.value = hourlyRate;
                 }
             }
 
             hoursInput.addEventListener('input', calculateTotal);
-            rateInput.addEventListener('input', calculateTotal);
+            calculateTotal(); // Initial display
         });
     </script>
 }

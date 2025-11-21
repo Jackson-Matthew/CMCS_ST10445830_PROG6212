@@ -54,12 +54,24 @@ namespace CMCS_ST10445830.Controllers
         }
 
         // GET: Claims/Create
-        [Authorize(Roles = "Lecturer")]
-        public IActionResult Create()
-        {
-            return View();
-        }
+[Authorize(Roles = "Lecturer")]
+public async Task<IActionResult> Create()
+{
+    var userId = User.FindFirstValue("UserId");
+    if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int lecturerId))
+    {
+        return RedirectToAction("AccessDenied", "Account");
+    }
 
+    // Get the lecturer's hourly rate
+    var lecturer = await _context.Users
+        .Include(u => u.UserProfile)
+        .FirstOrDefaultAsync(u => u.Id == lecturerId);
+
+    ViewBag.UserHourlyRate = lecturer?.UserProfile?.HourlyRate;
+
+    return View();
+}
         // POST: Claims/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -74,8 +86,23 @@ namespace CMCS_ST10445830.Controllers
                     return RedirectToAction("AccessDenied", "Account");
                 }
 
+                // Get the lecturer with their profile to verify hourly rate exists
+                var lecturer = await _context.Users
+                    .Include(u => u.UserProfile)
+                    .FirstOrDefaultAsync(u => u.Id == lecturerId);
+
+                if (lecturer?.UserProfile == null || lecturer.UserProfile.HourlyRate <= 0)
+                {
+                    TempData["ErrorMessage"] = "Your profile is incomplete. Please contact HR to set up your hourly rate.";
+                    return View(claim);
+                }
+
                 // Set the LecturerId from the logged-in user
                 claim.LecturerId = lecturerId;
+
+                // CRITICAL: Set the HourlyRateAtSubmission from the user's profile
+                claim.HourlyRateAtSubmission = lecturer.UserProfile.HourlyRate;
+
                 claim.Status = "Pending";
                 claim.SubmittedAt = DateTime.UtcNow;
 
@@ -102,7 +129,7 @@ namespace CMCS_ST10445830.Controllers
                 _context.Add(claim);
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Claim submitted successfully!";
+                TempData["SuccessMessage"] = $"Claim submitted successfully! Total amount: {claim.TotalAmount:C}";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -136,27 +163,41 @@ namespace CMCS_ST10445830.Controllers
         [Authorize(Roles = "Academic coordinator")]
         public async Task<IActionResult> Approve(int id)
         {
-            var claim = await _context.Claims.FindAsync(id);
-            if (claim == null)
+            try
             {
-                return NotFound();
-            }
+                var claim = await _context.Claims
+                    .Include(c => c.Lecturer)
+                    .ThenInclude(l => l.UserProfile)
+                    .FirstOrDefaultAsync(c => c.Id == id);
 
-            var userId = User.FindFirstValue("UserId");
-            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int coordinatorId))
+                if (claim == null)
+                {
+                    TempData["ErrorMessage"] = "Claim not found.";
+                    return RedirectToAction(nameof(Manage));
+                }
+
+                var userId = User.FindFirstValue("UserId");
+                if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int coordinatorId))
+                {
+                    return RedirectToAction("AccessDenied", "Account");
+                }
+
+                claim.CoordinatorId = coordinatorId;
+                claim.Status = "Approved";
+                claim.ReviewedAt = DateTime.UtcNow;
+
+                _context.Update(claim);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = $"Claim from {claim.Lecturer?.UserProfile?.FirstName} {claim.Lecturer?.UserProfile?.LastName} approved successfully! Amount: {claim.TotalAmount:C}";
+                return RedirectToAction(nameof(Manage));
+            }
+            catch (Exception ex)
             {
-                return RedirectToAction("AccessDenied", "Account");
+                _logger.LogError(ex, "Error approving claim {ClaimId}", id);
+                TempData["ErrorMessage"] = "An error occurred while approving the claim.";
+                return RedirectToAction(nameof(Manage));
             }
-
-            claim.CoordinatorId = coordinatorId;
-            claim.Status = "Approved";
-            claim.ReviewedAt = DateTime.UtcNow;
-
-            _context.Update(claim);
-            await _context.SaveChangesAsync();
-
-            TempData["SuccessMessage"] = "Claim approved successfully!";
-            return RedirectToAction(nameof(ViewAll));
         }
 
         // GET: Claims/Reject/5 (for Academic coordinators)
@@ -186,27 +227,41 @@ namespace CMCS_ST10445830.Controllers
         [Authorize(Roles = "Academic coordinator")]
         public async Task<IActionResult> Reject(int id)
         {
-            var claim = await _context.Claims.FindAsync(id);
-            if (claim == null)
+            try
             {
-                return NotFound();
-            }
+                var claim = await _context.Claims
+                    .Include(c => c.Lecturer)
+                    .ThenInclude(l => l.UserProfile)
+                    .FirstOrDefaultAsync(c => c.Id == id);
 
-            var userId = User.FindFirstValue("UserId");
-            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int coordinatorId))
+                if (claim == null)
+                {
+                    TempData["ErrorMessage"] = "Claim not found.";
+                    return RedirectToAction(nameof(Manage));
+                }
+
+                var userId = User.FindFirstValue("UserId");
+                if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int coordinatorId))
+                {
+                    return RedirectToAction("AccessDenied", "Account");
+                }
+
+                claim.CoordinatorId = coordinatorId;
+                claim.Status = "Rejected";
+                claim.ReviewedAt = DateTime.UtcNow;
+
+                _context.Update(claim);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = $"Claim from {claim.Lecturer?.UserProfile?.FirstName} {claim.Lecturer?.UserProfile?.LastName} has been rejected.";
+                return RedirectToAction(nameof(Manage));
+            }
+            catch (Exception ex)
             {
-                return RedirectToAction("AccessDenied", "Account");
+                _logger.LogError(ex, "Error rejecting claim {ClaimId}", id);
+                TempData["ErrorMessage"] = "An error occurred while rejecting the claim.";
+                return RedirectToAction(nameof(Manage));
             }
-
-            claim.CoordinatorId = coordinatorId;
-            claim.Status = "Rejected";
-            claim.ReviewedAt = DateTime.UtcNow;
-
-            _context.Update(claim);
-            await _context.SaveChangesAsync();
-
-            TempData["SuccessMessage"] = "Claim rejected.";
-            return RedirectToAction(nameof(ViewAll));
         }
 
         // GET: Claims/Details/5
@@ -250,6 +305,7 @@ namespace CMCS_ST10445830.Controllers
         {
             var pendingClaims = await _context.Claims
                 .Include(c => c.Lecturer)
+                .ThenInclude(l => l.UserProfile)
                 .Where(c => c.Status == "Pending")
                 .OrderByDescending(c => c.SubmittedAt)
                 .ToListAsync();

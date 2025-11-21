@@ -6,32 +6,19 @@
     <div class="d-inline-block px-4 py-2 rounded mb-5"
          style="background-color: rgba(255, 255, 255, 0.7);">
         <h1 class="text-dark display-3 fw-bold">Welcome, HR Manager!</h1>
-        <p class="lead text-dark mb-0">Monitor claims and generate reports</p>
+        <p class="lead text-dark mb-0">User Management & Reporting</p>
     </div>
 
     <div class="row w-75">
-        <!-- Claims Overview Card -->
+        <!-- User Management Card -->
         <div class="col-md-4 col-sm-6 mb-4">
             <div class="card shadow-lg h-100 border-0">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <i class="fas fa-eye fa-3x text-info mb-3"></i>
-                    <h5 class="card-title">View All Claims</h5>
-                    <p class="card-text text-muted">Monitor all claims across the organization</p>
-                    <a asp-controller="Claims" asp-action="ViewAll"
-                       class="btn btn-outline-info mt-3">View Claims</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Analytics Card -->
-        <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card shadow-lg h-100 border-0">
-                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <i class="fas fa-chart-pie fa-3x text-success mb-3"></i>
-                    <h5 class="card-title">Analytics</h5>
-                    <p class="card-text text-muted">View detailed analytics and insights</p>
-                    <a asp-controller="Claims" asp-action="ViewAll"
-                       class="btn btn-outline-success mt-3">View Analytics</a>
+                    <i class="fas fa-users-cog fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">User Management</h5>
+                    <p class="card-text text-muted">Add and manage all users</p>
+                    <a asp-controller="HRManagement" asp-action="Index"
+                       class="btn btn-outline-primary mt-3">Manage Users</a>
                 </div>
             </div>
         </div>
@@ -40,11 +27,24 @@
         <div class="col-md-4 col-sm-6 mb-4">
             <div class="card shadow-lg h-100 border-0">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                    <i class="fas fa-file-invoice-dollar fa-3x text-primary mb-3"></i>
-                    <h5 class="card-title">Financial Reports</h5>
-                    <p class="card-text text-muted">Generate financial reports and summaries</p>
+                    <i class="fas fa-chart-pie fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Reports & Invoices</h5>
+                    <p class="card-text text-muted">Generate claims reports</p>
+                    <a asp-controller="HRManagement" asp-action="Reports"
+                       class="btn btn-outline-success mt-3">View Reports</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Claims Card -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-lg h-100 border-0">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <i class="fas fa-eye fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">View All Claims</h5>
+                    <p class="card-text text-muted">Monitor all claims</p>
                     <a asp-controller="Claims" asp-action="ViewAll"
-                       class="btn btn-outline-primary mt-3">Generate Reports</a>
+                       class="btn btn-outline-info mt-3">View Claims</a>
                 </div>
             </div>
         </div>

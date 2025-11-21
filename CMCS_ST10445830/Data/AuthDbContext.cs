@@ -29,9 +29,9 @@ namespace CMCS_ST10445830.Data
             // -------------------------------
             // One-to-one User <-> UserProfile
             // -------------------------------
-            modelBuilder.Entity<UserProfile>()
-                .HasOne(up => up.User)
-                .WithOne()
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.UserProfile)
+                .WithOne(up => up.User)
                 .HasForeignKey<UserProfile>(up => up.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
