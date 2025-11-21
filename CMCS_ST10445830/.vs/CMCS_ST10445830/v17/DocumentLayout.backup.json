@@ -48,7 +48,7 @@
               "RelativeDocumentMoniker": "Views\\Claims\\Create.cshtml",
               "ToolTip": "C:\\Users\\matth\\OneDrive\\Desktop\\GitHub\\CMCS_ST10445830_PROG6212\\CMCS_ST10445830\\Views\\Claims\\Create.cshtml",
               "RelativeToolTip": "Views\\Claims\\Create.cshtml",
-              "ViewState": "AgIAAIIAAAAAAAAAAAAQwKcAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAQwJAAAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-21T15:46:26.598Z",
               "EditorCaption": ""
@@ -63,8 +63,7 @@
               "RelativeToolTip": "Controllers\\ClaimsController.cs",
               "ViewState": "AgIAAEEBAAAAAAAAAAAQwGYBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:42:01.474Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T15:42:01.474Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "RelativeToolTip": "Views\\HRManagement\\Reports.cshtml",
               "ViewState": "AgIAAD0AAAAAAAAAAAAwwFIAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-21T15:34:52.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T15:34:52.402Z"
             },
             {
               "$type": "Document",
@@ -89,8 +87,7 @@
               "RelativeToolTip": "Controllers\\HRManagementController.cs",
               "ViewState": "AgIAAOUAAAAAAAAAAAAkwBoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:33:16.16Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T15:33:16.16Z"
             },
             {
               "$type": "Document",
@@ -102,8 +99,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:32:23.892Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T15:32:23.892Z"
             },
             {
               "$type": "Document",
@@ -115,8 +111,7 @@
               "RelativeToolTip": "Services\\PdfReportService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-21T15:31:24.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-21T15:31:24.792Z"
             }
           ]
         }
