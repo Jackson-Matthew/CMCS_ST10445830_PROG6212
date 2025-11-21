@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CMCS_ST10445830.Data;
 using CMCS_ST10445830.Models;
+using CMCS_ST10445830.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddScoped<PdfReportService>();
 
 // Register your DbContext
 builder.Services.AddDbContext<AuthDbContext>(options =>

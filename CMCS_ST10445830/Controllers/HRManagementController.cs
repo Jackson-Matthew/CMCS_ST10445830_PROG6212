@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CMCS_ST10445830.Data;
+﻿using CMCS_ST10445830.Data;
 using CMCS_ST10445830.Models;
+using CMCS_ST10445830.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace CMCS_ST10445830.Controllers
@@ -232,8 +233,6 @@ namespace CMCS_ST10445830.Controllers
                 return View(reportData);
             }
         }
-
-        // POST: HRManagement/GenerateInvoice - Generate CSV report
         [HttpPost]
         public async Task<IActionResult> GenerateInvoice(DateTime? startDate = null, DateTime? endDate = null)
         {
@@ -261,45 +260,27 @@ namespace CMCS_ST10445830.Controllers
                     .ThenBy(c => c.SubmittedAt)
                     .ToListAsync();
 
-                // Generate CSV report
-                var csv = GenerateCsvReport(approvedClaims);
-                var fileName = $"Claims_Report_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+                if (!approvedClaims.Any())
+                {
+                    TempData["ErrorMessage"] = "No approved claims found for the selected date range.";
+                    return RedirectToAction(nameof(Reports));
+                }
 
-                return File(System.Text.Encoding.UTF8.GetBytes(csv), "text/csv", fileName);
+                // Generate PDF
+                var pdfService = new PdfReportService();
+                var pdfBytes = pdfService.GenerateClaimsReport(approvedClaims, startDate, endDate);
+
+                var fileName = $"Claims_Report_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+                return File(pdfBytes, "application/pdf", fileName);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error generating invoice");
-                TempData["ErrorMessage"] = "Error generating report.";
+                _logger.LogError(ex, "Error generating PDF report");
+                TempData["ErrorMessage"] = "Error generating PDF report. Please try again.";
                 return RedirectToAction(nameof(Reports));
             }
         }
 
-        private string GenerateCsvReport(List<Claim> claims)
-        {
-            var csv = "Claim ID,Lecturer Name,Email,Hours Worked,Hourly Rate,Total Amount,Submitted Date,Approved Date,Approved By\n";
-
-            foreach (var claim in claims)
-            {
-                var lecturerName = claim.Lecturer?.UserProfile != null
-                    ? $"{claim.Lecturer.UserProfile.FirstName} {claim.Lecturer.UserProfile.LastName}"
-                    : $"User{claim.LecturerId}";
-
-                var lecturerEmail = claim.Lecturer?.UserProfile?.Email ?? "N/A";
-                var approvedBy = claim.Coordinator?.UserProfile != null
-                    ? $"{claim.Coordinator.UserProfile.FirstName} {claim.Coordinator.UserProfile.LastName}"
-                    : "N/A";
-
-                csv += $"{claim.Id},{lecturerName},{lecturerEmail},{claim.HoursWorked},{claim.HourlyRate:C},{claim.TotalAmount:C},{claim.SubmittedAt:yyyy-MM-dd},{claim.ReviewedAt:yyyy-MM-dd},{approvedBy}\n";
-            }
-
-            // Add summary
-            var totalAmount = claims.Sum(c => c.TotalAmount);
-            var totalClaims = claims.Count;
-            csv += $"\nSUMMARY\nTotal Claims:,{totalClaims}\nTotal Amount:,{totalAmount:C}";
-
-            return csv;
-        }
 
         private bool UserExists(int id)
         {

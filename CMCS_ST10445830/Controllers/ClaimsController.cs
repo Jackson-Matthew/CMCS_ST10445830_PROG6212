@@ -54,84 +54,127 @@ namespace CMCS_ST10445830.Controllers
         }
 
         // GET: Claims/Create
-[Authorize(Roles = "Lecturer")]
-public async Task<IActionResult> Create()
-{
-    var userId = User.FindFirstValue("UserId");
-    if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int lecturerId))
-    {
-        return RedirectToAction("AccessDenied", "Account");
-    }
+        [Authorize(Roles = "Lecturer")]
+        public async Task<IActionResult> Create()
+        {
+            var userId = User.FindFirstValue("UserId");
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int lecturerId))
+            {
+                return RedirectToAction("AccessDenied", "Account");
+            }
 
-    // Get the lecturer's hourly rate
-    var lecturer = await _context.Users
-        .Include(u => u.UserProfile)
-        .FirstOrDefaultAsync(u => u.Id == lecturerId);
+            // Get the lecturer's profile information
+            var lecturer = await _context.Users
+                .Include(u => u.UserProfile)
+                .FirstOrDefaultAsync(u => u.Id == lecturerId);
 
-    ViewBag.UserHourlyRate = lecturer?.UserProfile?.HourlyRate;
+            if (lecturer?.UserProfile == null || lecturer.UserProfile.HourlyRate <= 0)
+            {
+                TempData["ErrorMessage"] = "Your profile is incomplete. Please contact HR to set up your profile and hourly rate.";
+                return RedirectToAction("Index");
+            }
 
-    return View();
-}
+            // Pass all user info to the view for display
+            ViewBag.UserHourlyRate = lecturer.UserProfile.HourlyRate;
+            ViewBag.UserFirstName = lecturer.UserProfile.FirstName;
+            ViewBag.UserLastName = lecturer.UserProfile.LastName;
+            ViewBag.UserEmail = lecturer.UserProfile.Email;
+
+            return View();
+        }
+
         // POST: Claims/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Lecturer")]
         public async Task<IActionResult> Create(CMCS_ST10445830.Models.Claim claim)
         {
+            var userId = User.FindFirstValue("UserId");
+            if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int lecturerId))
+            {
+                return RedirectToAction("AccessDenied", "Account");
+            }
+
+            // Get the lecturer with their profile
+            var lecturer = await _context.Users
+                .Include(u => u.UserProfile)
+                .FirstOrDefaultAsync(u => u.Id == lecturerId);
+
+            if (lecturer?.UserProfile == null || lecturer.UserProfile.HourlyRate <= 0)
+            {
+                TempData["ErrorMessage"] = "Your profile is incomplete. Please contact HR to set up your hourly rate.";
+                return View(claim);
+            }
+
+            // VALIDATION 1: Check if hours exceed monthly limit (180 hours)
+            if (claim.HoursWorked > 180)
+            {
+                ModelState.AddModelError("HoursWorked", "Hours worked cannot exceed 180 hours per month.");
+            }
+
+            // VALIDATION 2: Check if hours are at least 1
+            if (claim.HoursWorked < 1)
+            {
+                ModelState.AddModelError("HoursWorked", "Hours worked must be at least 1 hour.");
+            }
+
+            // VALIDATION 3: Check for reasonable maximum (optional but good practice)
+            if (claim.HoursWorked > 300)
+            {
+                ModelState.AddModelError("HoursWorked", "Hours worked seem unusually high. Please verify the amount.");
+            }
+
             if (ModelState.IsValid)
             {
-                var userId = User.FindFirstValue("UserId");
-                if (string.IsNullOrEmpty(userId) || !int.TryParse(userId, out int lecturerId))
+                try
                 {
-                    return RedirectToAction("AccessDenied", "Account");
-                }
+                    // Set the LecturerId from the logged-in user
+                    claim.LecturerId = lecturerId;
 
-                // Get the lecturer with their profile to verify hourly rate exists
-                var lecturer = await _context.Users
-                    .Include(u => u.UserProfile)
-                    .FirstOrDefaultAsync(u => u.Id == lecturerId);
+                    // AUTO-PULL: Set the HourlyRateAtSubmission from the user's profile
+                    claim.HourlyRateAtSubmission = lecturer.UserProfile.HourlyRate;
 
-                if (lecturer?.UserProfile == null || lecturer.UserProfile.HourlyRate <= 0)
-                {
-                    TempData["ErrorMessage"] = "Your profile is incomplete. Please contact HR to set up your hourly rate.";
-                    return View(claim);
-                }
+                    claim.Status = "Pending";
+                    claim.SubmittedAt = DateTime.UtcNow;
 
-                // Set the LecturerId from the logged-in user
-                claim.LecturerId = lecturerId;
-
-                // CRITICAL: Set the HourlyRateAtSubmission from the user's profile
-                claim.HourlyRateAtSubmission = lecturer.UserProfile.HourlyRate;
-
-                claim.Status = "Pending";
-                claim.SubmittedAt = DateTime.UtcNow;
-
-                // Handle file upload
-                if (claim.DocumentFile != null && claim.DocumentFile.Length > 0)
-                {
-                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
-                    if (!Directory.Exists(uploadsFolder))
+                    // Handle file upload
+                    if (claim.DocumentFile != null && claim.DocumentFile.Length > 0)
                     {
-                        Directory.CreateDirectory(uploadsFolder);
+                        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+
+                        var uniqueFileName = Guid.NewGuid().ToString() + "_" + claim.DocumentFile.FileName;
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await claim.DocumentFile.CopyToAsync(stream);
+                        }
+
+                        claim.DocumentationPath = uniqueFileName;
                     }
 
-                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + claim.DocumentFile.FileName;
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    _context.Add(claim);
+                    await _context.SaveChangesAsync();
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await claim.DocumentFile.CopyToAsync(stream);
-                    }
-
-                    claim.DocumentationPath = uniqueFileName;
+                    TempData["SuccessMessage"] = $"Claim submitted successfully! Total amount: {claim.TotalAmount:C}";
+                    return RedirectToAction(nameof(Index));
                 }
-
-                _context.Add(claim);
-                await _context.SaveChangesAsync();
-
-                TempData["SuccessMessage"] = $"Claim submitted successfully! Total amount: {claim.TotalAmount:C}";
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error creating claim for user {UserId}", lecturerId);
+                    ModelState.AddModelError("", "An error occurred while submitting your claim. Please try again.");
+                }
             }
+
+            // If we get here, there were validation errors - reload user data for the view
+            ViewBag.UserHourlyRate = lecturer.UserProfile.HourlyRate;
+            ViewBag.UserFirstName = lecturer.UserProfile.FirstName;
+            ViewBag.UserLastName = lecturer.UserProfile.LastName;
+            ViewBag.UserEmail = lecturer.UserProfile.Email;
 
             return View(claim);
         }
